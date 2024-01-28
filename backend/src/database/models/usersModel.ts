@@ -11,6 +11,10 @@ const userModel = connection.define('user', {
     type: DataTypes.STRING(300),
     allowNull: false,
   },
+  password: {
+    type: DataTypes.STRING(300),
+    allowNull: false,
+  },
   birthday: {
     type: DataTypes.DATE(),
     allowNull: false,

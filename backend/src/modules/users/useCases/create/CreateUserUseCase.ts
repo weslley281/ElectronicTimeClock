@@ -6,6 +6,7 @@ import { hash } from 'bcrypt';
 interface IRequest {
   id_user?: string;
   user: string;
+  password: string;
   birthday: Date | string;
   phone: string;
   email: string;
@@ -29,6 +30,7 @@ class CreateUserUseCase {
   async execute({
     id_user,
     user,
+    password,
     birthday,
     phone,
     email,
@@ -53,6 +55,7 @@ class CreateUserUseCase {
       return this.userRepository.create({
         id_user,
         user,
+        password,
         birthday,
         phone,
         email,

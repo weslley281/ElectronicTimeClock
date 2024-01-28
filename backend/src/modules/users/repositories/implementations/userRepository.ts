@@ -19,6 +19,7 @@ class UserRepository implements IUserRepository {
   async create({
     id_user,
     user,
+    password,
     birthday,
     phone,
     email,
@@ -38,6 +39,7 @@ class UserRepository implements IUserRepository {
     const obj: any = await userModel.create({
       id_user,
       user,
+      password,
       birthday,
       phone,
       email,
@@ -61,6 +63,7 @@ class UserRepository implements IUserRepository {
   async update({
     id_user,
     user,
+    password,
     birthday,
     phone,
     email,
@@ -80,6 +83,7 @@ class UserRepository implements IUserRepository {
       {
         id_user,
         user,
+        password,
         birthday,
         phone,
         email,

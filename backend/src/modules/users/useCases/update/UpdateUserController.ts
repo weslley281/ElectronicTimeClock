@@ -10,6 +10,7 @@ class UpdateUserController {
     const updateUserBodySchema = z.object({
       id_user: z.string(),
       user: z.string(),
+      password: z.string(),
       birthday: z.string(),
       address_line1: z.string(),
       address_line2: z.string(),
@@ -31,6 +32,7 @@ class UpdateUserController {
       const {
         id_user,
         user,
+        password,
         birthday,
         phone,
         email,
@@ -49,6 +51,7 @@ class UpdateUserController {
       const obj = await this.updateUserUseCase.execute({
         id_user,
         user,
+        password,
         birthday,
         phone,
         email,

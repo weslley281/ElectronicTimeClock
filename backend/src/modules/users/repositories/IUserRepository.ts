@@ -5,6 +5,7 @@ interface IUserRepository {
   create({
     id_user,
     user,
+    password,
     birthday,
     phone,
     email,
@@ -24,6 +25,7 @@ interface IUserRepository {
   update({
     id_user,
     user,
+    password,
     birthday,
     phone,
     email,

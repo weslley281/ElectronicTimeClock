@@ -10,6 +10,7 @@ class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     const createUserBodySchema = z.object({
       user: z.string(),
+      password: z.string(),
       birthday: z.string(),
       address_line1: z.string(),
       address_line2: z.string(),
@@ -31,6 +32,7 @@ class CreateUserController {
     try {
       const {
         user,
+        password,
         birthday,
         phone,
         email,
@@ -49,6 +51,7 @@ class CreateUserController {
       const obj = await this.createUserUseCase.execute({
         id_user,
         user,
+        password,
         birthday,
         phone,
         email,

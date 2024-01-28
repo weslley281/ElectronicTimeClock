@@ -6,6 +6,7 @@ import { hash } from 'bcrypt';
 interface IRequest {
   id_user?: string;
   user: string;
+  password: string;
   birthday: Date | string;
   phone: string;
   email: string;
@@ -29,6 +30,7 @@ class UpdateUserUseCase {
   async execute({
     id_user,
     user,
+    password,
     birthday,
     phone,
     email,
@@ -48,6 +50,7 @@ class UpdateUserUseCase {
       return this.userRepository.update({
         id_user,
         user,
+        password,
         birthday,
         phone,
         email,
@@ -61,7 +64,7 @@ class UpdateUserUseCase {
         level,
         active,
         id_store,
-        updatedAt: updatedAt || new Date,
+        updatedAt: updatedAt || new Date(),
       });
     } catch (error) {
       throw new AppError(`Cannot update User: ${error}`);
