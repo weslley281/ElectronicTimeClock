@@ -1,0 +1,678 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Electronic Time Clock",
+    "description": "This is an application serving the Electronic Time Clock Frontend.",
+    "version": "1.0.0",
+    "termsOfService": "This API was developed exclusively for use in the frontend of Electronic Time Clock applications.",
+    "contact": {
+      "email": "weslleyhenrique800@gmail.com",
+      "name": "Weslley Henrique Vieira Ferraz",
+      "url": "https://weslleydesenvolvedorweb.com.br"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Local server"
+    },
+    {
+      "url": "https://git.heroku.com/apibaoba.git",
+      "description": "Hosted server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Store",
+      "description": "Storers management"
+    },
+    {
+      "name": "User",
+      "description": "Users management"
+    }
+  ],
+  "paths": {
+    "/store/create": {
+      "post": {
+        "tags": ["Store"],
+        "summary": "Create a new store",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "store",
+                  "phone",
+                  "email",
+                  "address_line1",
+                  "address_line2",
+                  "postalCode",
+                  "neighborhood",
+                  "city",
+                  "state",
+                  "country"
+                ],
+                "type": "object",
+                "properties": {
+                  "store": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "address_line1": {
+                    "type": "string"
+                  },
+                  "address_line2": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "neighborhood": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "store": "Loja Ultra Moderna",
+                  "phone": "(65) 3029-9010",
+                  "email": "admbaobabrasil@gmail.com",
+                  "address_line1": "Rual Professor Feliciano Galdino, 585",
+                  "address_line2": "Ao lado da ortosono",
+                  "postalCode": "78025-110",
+                  "neighborhood": "Porto",
+                  "city": "Cuiabá",
+                  "state": "Mato Grosso",
+                  "country": "Brasil"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Store created successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/store/update": {
+      "put": {
+        "tags": ["Store"],
+        "summary": "Update a store",
+        "description": "To update a store, add this fields in the request body.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "id_store",
+                  "store",
+                  "phone",
+                  "email",
+                  "address_line1",
+                  "address_line2",
+                  "postalCode",
+                  "neighborhood",
+                  "city",
+                  "state",
+                  "country"
+                ],
+                "type": "object",
+                "properties": {
+                  "id_store": {
+                    "type": "string"
+                  },
+                  "store": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "address_line1": {
+                    "type": "string"
+                  },
+                  "address_line2": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "neighborhood": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "id_store": "f3950d1c-cc17-44d7-aedb-f12479ab77b3",
+                  "store": "Loja Baoba Porto",
+                  "phone": "(65) 3029-9010",
+                  "email": "admbaobabrasil@gmail.com",
+                  "address_line1": "Rual Professor Feliciano Galdino, 585",
+                  "address_line2": "Ao lado da ortosono",
+                  "postalCode": "78025-110",
+                  "neighborhood": "Porto",
+                  "city": "Cuiabá",
+                  "state": "Mato Grosso",
+                  "country": "Brasil"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/store/id/{id_store}": {
+      "get": {
+        "tags": ["Store"],
+        "summary": "Get a store by id",
+        "description": "To get a store by id, add this fields in the request body.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "store",
+            "required": true,
+            "allowEmptyValue": false,
+            "example": "f3950d1c-cc17-44d7-aedb-f12479ab77b3",
+            "schema": {
+              "required": ["id_store"],
+              "type": "object",
+              "properties": {
+                "id_store": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "id_store": "f3950d1c-cc17-44d7-aedb-f12479ab77b3"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/store/email/{email}": {
+      "get": {
+        "tags": ["Store"],
+        "summary": "Get a store by id",
+        "description": "To get a store by id, add this fields in the request body.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "store",
+            "required": true,
+            "allowEmptyValue": false,
+            "example": "admbaobabrasil@gmail.com",
+            "schema": {
+              "required": ["email"],
+              "type": "object",
+              "properties": {
+                "id_store": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/store/delete/id/{id_store}": {
+      "delete": {
+        "tags": ["Store"],
+        "summary": "Delete a store by id",
+        "description": "To delete a store by id, add this fields in the request body.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stores",
+            "required": true,
+            "allowEmptyValue": false,
+            "example": "f3950d1c-cc17-44d7-aedb-f12479ab77b3",
+            "schema": {
+              "required": ["id_store"],
+              "type": "object",
+              "properties": {
+                "id_store": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/store/delete/email/{email}": {
+      "delete": {
+        "tags": ["Store"],
+        "summary": "Delete a store by email",
+        "description": "To delete a store by id, add this fields in the request body.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stores",
+            "required": true,
+            "allowEmptyValue": false,
+            "example": "f3950d1c-cc17-44d7-aedb-f12479ab77b3",
+            "schema": {
+              "required": ["email"],
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/user/create": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "user",
+                  "phone",
+                  "birthday",
+                  "email",
+                  "address_line1",
+                  "address_line2",
+                  "postalCode",
+                  "neighborhood",
+                  "city",
+                  "state",
+                  "country",
+                  "level",
+                  "active",
+                  "id_store"
+                ],
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "birthday": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "address_line1": {
+                    "type": "string"
+                  },
+                  "address_line2": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "neighborhood": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "level": {
+                    "type": "string"
+                  },
+                  "active": {
+                    "type": "string"
+                  },
+                  "id_store": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "user": "Weslley Henrique Vieira Ferraz",
+                  "phone": "(65) 99915-7130",
+                  "birthday": "1995-11-28",
+                  "email": "weslleyhenrique800@gmail.com",
+                  "address_line1": "Rua Moises, 30",
+                  "address_line2": "",
+                  "postalCode": "78148-800",
+                  "neighborhood": "Paiaguas",
+                  "city": "Várzea Grande",
+                  "state": "Mato Grosso",
+                  "country": "Brasil",
+                  "level": "employee",
+                  "active": "active",
+                  "id_store": "f3950d1c-cc17-44d7-aedb-f12479ab77b3"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/user/update": {
+      "put": {
+        "tags": ["User"],
+        "summary": "Update a user",
+        "description": "To update a user, add this fields in the request body.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "id_user",
+                  "user",
+                  "phone",
+                  "birthday",
+                  "email",
+                  "address_line1",
+                  "address_line2",
+                  "postalCode",
+                  "neighborhood",
+                  "city",
+                  "state",
+                  "country",
+                  "level",
+                  "active",
+                  "id_store"
+                ],
+                "type": "object",
+                "properties": {
+                  "id_user": {
+                    "type": "string"
+                  },
+                  "user": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "birthday": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "address_line1": {
+                    "type": "string"
+                  },
+                  "address_line2": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "neighborhood": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "level": {
+                    "type": "string"
+                  },
+                  "active": {
+                    "type": "string"
+                  },
+                  "id_store": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "id_user": "be40573d-8fca-4153-94b9-e51e7303204f",
+                  "user": "Weslley Henrique Vieira Ferraz",
+                  "phone": "(65) 98123-3996",
+                  "birthday": "1995-11-28",
+                  "email": "weslleyhenrique800@gmail.com",
+                  "address_line1": "Rua Moises, 30",
+                  "address_line2": "",
+                  "postalCode": "78148-800",
+                  "neighborhood": "Paiaguas",
+                  "city": "Várzea Grande",
+                  "state": "Mato Grosso",
+                  "country": "Brasil",
+                  "level": "employee",
+                  "active": "active",
+                  "id_store": "f3950d1c-cc17-44d7-aedb-f12479ab77b3"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/user/id/{id_user}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get a user by id",
+        "description": "To get a user by id, add this fields in the request body.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user",
+            "required": true,
+            "allowEmptyValue": false,
+            "example": "f3950d1c-cc17-44d7-aedb-f12479ab77b3",
+            "schema": {
+              "required": ["id_user"],
+              "type": "object",
+              "properties": {
+                "id_user": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "id_user": "f3950d1c-cc17-44d7-aedb-f12479ab77b3"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/user/email/{email}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get a user by id",
+        "description": "To get a user by id, add this fields in the request body.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user",
+            "required": true,
+            "allowEmptyValue": false,
+            "example": "weslleyhenrique800@gmail.com",
+            "schema": {
+              "required": ["email"],
+              "type": "object",
+              "properties": {
+                "id_user": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/user/delete/id/{id_user}": {
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete a user by id",
+        "description": "To delete a user by id, add this fields in the request body.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "users",
+            "required": true,
+            "allowEmptyValue": false,
+            "example": "f3950d1c-cc17-44d7-aedb-f12479ab77b3",
+            "schema": {
+              "required": ["id_user"],
+              "type": "object",
+              "properties": {
+                "id_user": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/user/delete/email/{email}": {
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete a user by email",
+        "description": "To delete a user by id, add this fields in the request body.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "users",
+            "required": true,
+            "allowEmptyValue": false,
+            "example": "f3950d1c-cc17-44d7-aedb-f12479ab77b3",
+            "schema": {
+              "required": ["email"],
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  }
+}

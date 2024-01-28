@@ -1,0 +1,21 @@
+{
+  "name": "electronictimeclock",
+  "version": "1.0.0",
+  "description": "Um sistema de ponto eletronico para controlar as entradas e saídas dos funcionários",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron src/main.js",
+    "dev": "set NODE_ENV=development && electron src/main.js"
+  },
+  "keywords": [
+    "ponto",
+    "eletronico",
+    "ferraz"
+  ],
+  "author": "Weslley Henrique Vieira Ferraz",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.2",
+    "electron": "^28.2.0"
+  }
+}
