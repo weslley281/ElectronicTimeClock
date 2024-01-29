@@ -17,6 +17,10 @@ usersRoutes.put('/update', (request: Request, response: Response) => {
   updateUserController.handle(request, response);
 });
 
+usersRoutes.get('/all', (request: Request, response: Response) => {
+  listUserController.handle(request, response);
+});
+
 usersRoutes.get('/all/:id_store', (request: Request, response: Response) => {
   listUserController.handle(request, response);
 });

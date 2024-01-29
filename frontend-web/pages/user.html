@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuários</title>
+    <link rel="stylesheet" href="../libs/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="../libs/DataTables/datatables.min.js" />
+  </head>
+  <body>
+    <table id="minhaTabela" class="table table-bordered" width="100%" cellspacing="0">
+		<thead>
+			<tr>
+        <th scope="col">id_user</th>
+        <th scope="col">user</th>
+        <th scope="col">birthday</th>
+        <th scope="col">phone</th>
+        <th scope="col">email</th>
+        <th scope="col">address_line1</th>
+        <th scope="col">address_line2</th>
+        <th scope="col">postalCode</th>
+        <th scope="col">neighborhood</th>
+        <th scope="col">city</th>
+        <th scope="col">state</th>
+        <th scope="col">country</th>
+        <th scope="col">level</th>
+        <th scope="col">active</th>
+        <th scope="col">id_store</th>
+        <th scope="col">updatedAt</th>
+        <th scope="col">createdAt</th>
+				<th scope="col">Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+
+    <script src="../libs/jquery.js"></script>
+    <script src="../libs/bootstrap/pooper.js"></script>
+    <script src="../libs/bootstrap/bootstrap.js"></script>
+    <script src="../libs/DataTables/datatables.js"></script>
+    <script>
+      // Quando a página carregar
+      $(document).ready(function() {
+          // Fazer uma solicitação AJAX para obter os dados da API
+          $.ajax({
+              url: 'http://localhost:5000/user/all/f3950d1c-cc17-44d7-aedb-f12479ab77b3', // Substitua pelo URL real da sua API
+              method: 'GET',
+              success: function(data) {
+                  // Limpar o conteúdo atual da tabela
+                  $('#minhaTabela tbody').empty();
+
+                  // Iterar sobre os resultados e adicionar à tabela
+                  data.forEach(function(item) {
+                      // Criar uma nova linha na tabela
+                      var newRow = $('<tr>');
+
+                      // Preencher cada célula da linha com os dados do item
+                      newRow.append('<td>' + item.id_user + '</td>');
+                      newRow.append('<td>' + item.user + '</td>');
+                      // ... continuar para os outros campos
+
+                      // Adicionar ações, se necessário
+                      newRow.append('<td><button onclick="editar(' + item.id_user + ')">Editar</button></td>');
+
+                      // Adicionar a linha à tabela
+                      $('#minhaTabela tbody').append(newRow);
+                  });
+              },
+              error: function(error) {
+                  console.error('Erro na solicitação AJAX:', error);
+              }
+          });
+      });
+
+      // Função para editar um usuário
+      function editar(id_user) {
+          // Implemente a lógica para editar um usuário aqui
+          console.log('Editar usuário com ID:', id_user);
+      }
+  </script>
+  <script>$('#minhaTabela').DataTable();</script>
+  </body>
+</html>

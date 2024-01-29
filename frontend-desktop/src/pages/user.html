@@ -4,30 +4,137 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Usuários</title>
-    <link rel="stylesheet" href="./libs/bootstrap/bootstrap.css" />
-    <link rel="stylesheet" href="./libs/DataTables/datatables.min.js" />
+    <link rel="stylesheet" href="../libs/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="../libs/DataTables/datatables.min.js" />
   </head>
   <body>
     <table id="minhaTabela" class="table table-bordered" width="100%" cellspacing="0">
 		<thead>
 			<tr>
-				<th scope="col">Imagem</th>
-				<th scope="col">Nome</th>
-				<th scope="col">Nivel</th>
-				<th scope="col">Email</th>
-				<th scope="col">Telefone</th>
-				<th scope="col">Criação</th>
-				<th scope="col">Alteração</th>
-				<th scope="col">Ações</th>
+        <th scope="col">id_user</th>
+        <th scope="col">user</th>
+        <th scope="col">birthday</th>
+        <th scope="col">phone</th>
+        <th scope="col">email</th>
+        <th scope="col">level</th>
+        <th scope="col">active</th>
+        <th scope="col">id_store</th>
+        <th scope="col">updatedAt</th>
+        <th scope="col">createdAt</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
-            <tr>
-                <td></td>
-            </tr>
-        </tbody>
-        <tfoot>
-        </tfoot>
+    </tbody>
+    <tfoot>
+    </tfoot>
     </table>
+
+    <script src="../libs/jquery.js"></script>
+    <script src="../libs/bootstrap/pooper.js"></script>
+    <script src="../libs/bootstrap/bootstrap.js"></script>
+    <script src="../libs/DataTables/datatables.js"></script>
+
+    <!-- Antes do final do </body> -->
+    <!-- Modal -->
+    <div class="modal fade" id="detalhesUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="detalhesUsuarioModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detalhesUsuarioModalLabel">Detalhes do Usuário</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="detalhesUsuarioCorpo">
+            <!-- Conteúdo do modal será preenchido dinamicamente -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script>
+      // Quando a página carregar
+      $(document).ready(function() {
+          // Fazer uma solicitação AJAX para obter os dados da API
+          $.ajax({
+              url: 'http://localhost:5000/user/all/f3950d1c-cc17-44d7-aedb-f12479ab77b3', // Substitua pelo URL real da sua API
+              method: 'GET',
+              success: function(data) {
+                  // Limpar o conteúdo atual da tabela
+                  $('#minhaTabela tbody').empty();
+
+                  // Iterar sobre os resultados e adicionar à tabela
+                  data.forEach(function(item) {
+                      // Criar uma nova linha na tabela
+                      var newRow = $('<tr>');
+
+                      // Preencher cada célula da linha com os dados do item
+                      newRow.append('<td>' + item.id_user + '</td>');
+                      newRow.append('<td>' + item.user + '</td>');
+                      newRow.append('<td>' + formatarData(item.birthday) + '</td>');
+                      newRow.append('<td>' + item.phone + '</td>');
+                      newRow.append('<td>' + item.email + '</td>');
+                      newRow.append('<td>' + item.level + '</td>');
+                      newRow.append('<td>' + item.active + '</td>');
+                      newRow.append('<td>' + item.id_store + '</td>');
+                      newRow.append('<td>' + formatarData(item.updatedAt) + '</td>');
+                      newRow.append('<td>' + formatarData(item.createdAt) + '</td>');
+                      // ... continuar para os outros campos
+
+                      // Adicionar ações, se necessário
+
+                      newRow.append('<td><button class="btn btn-info" onclick="mostrarDetalhes(' + JSON.stringify(item) + ')">Detalhes</button></td>');
+                      newRow.append('<td><button class="btn btn-primary" onclick="editar(' + item.id_user + ')">Editar</button></td>');
+                      newRow.append('<td><button class="btn btn-danger" onclick="deletar(' + item.id_user + ')">Deletar</button></td>');
+
+                      // Adicionar a linha à tabela
+                      $('#minhaTabela tbody').append(newRow);
+                  });
+              },
+              error: function(error) {
+                  console.error('Erro na solicitação AJAX:', error);
+              }
+          });
+      });
+
+      // Função para editar um usuário
+      function editar(id_user) {
+          // Implemente a lógica para editar um usuário aqui
+          console.log('Editar usuário com ID:', id_user);
+      }
+
+      function formatarData(data) {
+          const dataFormatada = new Date(data);
+          return dataFormatada.toLocaleString(); // Ajuste conforme necessário
+      }
+
+      function mostrarDetalhes(usuario) {
+          // Preencher o conteúdo do modal com informações do usuário
+          var modalConteudo = '<strong>ID:</strong> ' + usuario.id_user + '<br>';
+          modalConteudo += '<strong>Nome:</strong> ' + usuario.user + '<br>';
+          modalConteudo += '<strong>Data de Nascimento:</strong> ' + formatarData(usuario.birthday) + '<br>';
+          modalConteudo += '<strong>Telefone:</strong> ' + usuario.phone + '<br>';
+          modalConteudo += '<strong>Email:</strong> ' + usuario.email + '<br>';
+          modalConteudo += '<strong>Nível:</strong> ' + usuario.level + '<br>';
+          modalConteudo += '<strong>Status:</strong> ' + usuario.active + '<br>';
+          modalConteudo += '<strong>ID da Loja:</strong> ' + usuario.id_store + '<br>';
+          modalConteudo += '<strong>Atualizado em:</strong> ' + formatarData(usuario.updatedAt) + '<br>';
+          modalConteudo += '<strong>Criado em:</strong> ' + formatarData(usuario.createdAt) + '<br>';
+
+          // Preencher o corpo do modal
+          $('#detalhesUsuarioCorpo').html(modalConteudo);
+
+          // Abrir o modal
+          $('#detalhesUsuarioModal').modal('show');
+      }
+        </script>
+  <script>$('#minhaTabela').DataTable();</script>
   </body>
 </html>
