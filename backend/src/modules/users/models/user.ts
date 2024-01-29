@@ -1,7 +1,7 @@
 class User {
   id_user?: string | undefined;
   user: string | undefined;
-  password: string | undefined;
+  password?: string | undefined;
   birthday: Date | string | undefined;
   phone: string | undefined;
   email: string | undefined;

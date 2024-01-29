@@ -1,7 +1,7 @@
 interface ICreateUserDTO {
   id_user?: string;
   user: string;
-  password: string;
+  password?: string;
   birthday: Date | string;
   phone: string;
   email: string;

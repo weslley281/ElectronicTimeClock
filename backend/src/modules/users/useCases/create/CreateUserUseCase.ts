@@ -51,11 +51,13 @@ class CreateUserUseCase {
 
     if (userAlreadyExists) throw new Error('User already exists');
 
+    const passwordHash = await hash(password, 8);
+
     try {
       return this.userRepository.create({
         id_user,
         user,
-        password,
+        password: passwordHash,
         birthday,
         phone,
         email,
