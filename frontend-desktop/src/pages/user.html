@@ -121,7 +121,7 @@
 
                       // Adicionar ações, se necessário
 
-                      newRow.append('<td><button class="btn btn-info" onclick="mostrarDetalhes(' + JSON.stringify(item) + ')">Detalhes</button></td>');
+                      newRow.append(`<td><a class="btn btn-info" href="./userDetail.html?id=${item.id_user}">Detalhes</a></td>`);
                       newRow.append('<td><button class="btn btn-primary" onclick="editar(' + item.id_user + ')">Editar</button></td>');
                       newRow.append('<td><button class="btn btn-danger" onclick="deletar(' + item.id_user + ')">Deletar</button></td>');
 
@@ -144,10 +144,6 @@
       function formatarData(data) {
           const dataFormatada = new Date(data);
           return dataFormatada.toLocaleString(); // Ajuste conforme necessário
-      }
-
-      function mostrarDetalhes(id_user) {
-        window.location=`userDetail.html`;
       }
         </script>
   <script>$('#minhaTabela').DataTable();</script>

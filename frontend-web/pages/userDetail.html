@@ -60,7 +60,7 @@
         </div>
       </div>
     </nav>
-		<div id="conteudo" class="container"></div>
+		<div id="conteudo"></div>
     <script src="../libs/jquery.js"></script>
     <script src="../libs/bootstrap/pooper.js"></script>
     <script src="../libs/bootstrap/bootstrap.js"></script>
@@ -80,11 +80,11 @@
                   // Iterar sobre os resultados e adicionar à tabela
                   data.forEach(function(item) {
                       // Criar uma nova linha na tabela
-                      var newRow = $('<ul class="list-group">');
+                      var newRow = $('<ul>');
                       var nivel = "";
-                      var ativo = item.active == "active" ? "Ativo" : "Inativo"
+                      var ativo = item.active == "active" ? "Ativo" : "Inativo";
 
-                      if (item.level == "admin") {
+                      if (item.level == admin) {
                         nivel = "Administrador";
                       } else if(item.level == "manager"){
                         nivel = "Gerente"
@@ -93,15 +93,7 @@
                       }
 
                       // Preencher cada célula da linha com os dados do item
-                      newRow.append('ID: <li class="list-group-item">' + item.id_user + '</li>');
-                      newRow.append('Usuário: <li class="list-group-item">' + item.user + '</li>');
-                      newRow.append('Aniversário: <li class="list-group-item">' + formatarData(item.birthday) + '</li>');
-                      newRow.append('Telefone: <li class="list-group-item">' + item.phone + '</li>');
-                      newRow.append('Email: <li class="list-group-item">' + item.email + '</li>');
-                      newRow.append('Nivel: <li class="list-group-item">' + item.level ==  + '</li>');
-                      newRow.append('Situação: <li class="list-group-item">' + ativo + '</li>');
-                      newRow.append('Ultima Alteração<li class="list-group-item">' + formatarData(item.updatedAt) + '</li>');
-                      newRow.append('Data de Criação do Cadastro: <li class="list-group-item">' + formatarData(item.createdAt) + '</li>');
+
                       // ... continuar para os outros campos
 
                       // Adicionar a linha à tabela

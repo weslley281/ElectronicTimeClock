@@ -8,6 +8,59 @@
     <link rel="stylesheet" href="../libs/DataTables/datatables.min.js" />
   </head>
   <body>
+    <!-- Navbar (Menu Responsivo) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Bater o Ponto</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="../index.html">Início</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./store.html">Lojas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./user.html">Usuários</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./register.html">Registros</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Configurações
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Perfil</a>
+                <a class="dropdown-item" href="#">Configurações Gerais</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Sair</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <table id="minhaTabela" class="table table-bordered" width="100%" cellspacing="0">
 		<thead>
 			<tr>
@@ -16,51 +69,27 @@
         <th scope="col">birthday</th>
         <th scope="col">phone</th>
         <th scope="col">email</th>
-        <th scope="col">address_line1</th>
-        <th scope="col">address_line2</th>
-        <th scope="col">postalCode</th>
-        <th scope="col">neighborhood</th>
-        <th scope="col">city</th>
-        <th scope="col">state</th>
-        <th scope="col">country</th>
         <th scope="col">level</th>
         <th scope="col">active</th>
         <th scope="col">id_store</th>
         <th scope="col">updatedAt</th>
         <th scope="col">createdAt</th>
-				<th scope="col">Ações</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-        <tfoot>
-        </tfoot>
+    </tbody>
+    <tfoot>
+    </tfoot>
     </table>
 
     <script src="../libs/jquery.js"></script>
     <script src="../libs/bootstrap/pooper.js"></script>
     <script src="../libs/bootstrap/bootstrap.js"></script>
     <script src="../libs/DataTables/datatables.js"></script>
+
     <script>
       // Quando a página carregar
       $(document).ready(function() {
@@ -80,10 +109,21 @@
                       // Preencher cada célula da linha com os dados do item
                       newRow.append('<td>' + item.id_user + '</td>');
                       newRow.append('<td>' + item.user + '</td>');
+                      newRow.append('<td>' + formatarData(item.birthday) + '</td>');
+                      newRow.append('<td>' + item.phone + '</td>');
+                      newRow.append('<td>' + item.email + '</td>');
+                      newRow.append('<td>' + item.level + '</td>');
+                      newRow.append('<td>' + item.active + '</td>');
+                      newRow.append('<td>' + item.id_store + '</td>');
+                      newRow.append('<td>' + formatarData(item.updatedAt) + '</td>');
+                      newRow.append('<td>' + formatarData(item.createdAt) + '</td>');
                       // ... continuar para os outros campos
 
                       // Adicionar ações, se necessário
-                      newRow.append('<td><button onclick="editar(' + item.id_user + ')">Editar</button></td>');
+
+                      newRow.append(`<td><a class="btn btn-info" href="./userDetail.html?id=${item.id_user}">Detalhes</a></td>`);
+                      newRow.append('<td><button class="btn btn-primary" onclick="editar(' + item.id_user + ')">Editar</button></td>');
+                      newRow.append('<td><button class="btn btn-danger" onclick="deletar(' + item.id_user + ')">Deletar</button></td>');
 
                       // Adicionar a linha à tabela
                       $('#minhaTabela tbody').append(newRow);
@@ -100,7 +140,12 @@
           // Implemente a lógica para editar um usuário aqui
           console.log('Editar usuário com ID:', id_user);
       }
-  </script>
+
+      function formatarData(data) {
+          const dataFormatada = new Date(data);
+          return dataFormatada.toLocaleString(); // Ajuste conforme necessário
+      }
+        </script>
   <script>$('#minhaTabela').DataTable();</script>
   </body>
 </html>
