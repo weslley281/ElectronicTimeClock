@@ -4,7 +4,7 @@
   "description": "Um sistema de ponto eletronico para controlar as entradas e saídas dos funcionários",
   "main": "index.js",
   "scripts": {
-    "start": "electron src/main.js",
+    "start": "electron-reload src/main.js && electron src/main.js",
     "dev": "set NODE_ENV=development && electron src/main.js"
   },
   "keywords": [
@@ -19,5 +19,8 @@
     "electron": "^28.2.0",
     "jquery": "^3.7.1",
     "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "electron-reload": "^2.0.0-alpha.1"
   }
 }
