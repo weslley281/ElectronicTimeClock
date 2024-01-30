@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Criar um Usuário</title>
+    <link rel="stylesheet" href="../libs/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="../libs/DataTables/datatables.min.js" />
+  </head>
+  <body>
+    <!-- Navbar (Menu Responsivo) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Criar um Usuário</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="../index.html">Início</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./store.html">Lojas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./user.html">Usuários</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./register.html">Registros</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Configurações
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Perfil</a>
+                <a class="dropdown-item" href="#">Configurações Gerais</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Sair</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+        <form>
+            <div class="form-group">
+                <label for="user">Nome:</label>
+                <input type="text" class="form-control" id="user" placeholder="Nome Completo">
+            </div>
+
+            <div class="form-group">
+                <label for="birthday">Nome:</label>
+                <input type="date" class="form-control" id="birthday">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Melhor Endereço de email</label>
+              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Seu email">
+              <small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" class="form-control" id="password" placeholder="Senha">
+            </div>
+
+            <div class="form-group">
+                <label for="address_line1">Endereço Linha 1:</label>
+                <input type="text" class="form-control" id="address_line1">
+            </div>
+
+            <div class="form-group">
+                <label for="address_line1">Endereço Linha 2:</label>
+                <input type="text" class="form-control" id="address_line2">
+            </div>
+
+            <div class="form-group">
+                <label for="postalCode">Código Postal:</label>
+                <input type="text" class="form-control" id="postalCode">
+            </div>
+
+            <div class="form-group">
+                <label for="neighborhood">Bairro:</label>
+                <input type="text" class="form-control" id="neighborhood">
+            </div>
+
+            <div class="form-group">
+                <label for="city">Cidade:</label>
+                <input type="text" class="form-control" id="city">
+            </div>
+
+            <div class="form-group">
+                <label for="state">Estado:</label>
+                <select class="form-control" id="state">
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="country">País:</label>
+                <input type="text" class="form-control" id="country" value="Brasil" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="level">Nível:</label>
+                <select class="form-control" id="level">
+                    <option value="employee">Funcionário</option>
+                    <option value="employee">Gerente</option>
+                </select>
+            </div>
+
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Clique em mim</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+    <script src="../libs/jquery.js"></script>
+    <script src="../libs/bootstrap/pooper.js"></script>
+    <script src="../libs/bootstrap/bootstrap.js"></script>
+    <script src="../libs/DataTables/datatables.js"></script>
+    </body>
+</html>
