@@ -11,7 +11,7 @@
     <!-- Navbar (Menu Responsivo) -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Bater o Ponto</a>
+        <a class="navbar-brand" href="#">Tabela de Usuários</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -61,19 +61,16 @@
       </div>
     </nav>
 
+    <div class="container-fluid">
     <table id="minhaTabela" class="table table-bordered" width="100%" cellspacing="0">
 		<thead>
 			<tr>
-        <th scope="col">id_user</th>
-        <th scope="col">user</th>
-        <th scope="col">birthday</th>
-        <th scope="col">phone</th>
-        <th scope="col">email</th>
-        <th scope="col">level</th>
-        <th scope="col">active</th>
-        <th scope="col">id_store</th>
-        <th scope="col">updatedAt</th>
-        <th scope="col">createdAt</th>
+        <th scope="col">ID</th>
+        <th scope="col">Usuário</th>
+        <th scope="col">Data de Nascimento</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Email</th>
+        <th scope="col">Nível</th>
 				<th scope="col"></th>
 				<th scope="col"></th>
 				<th scope="col"></th>
@@ -84,6 +81,7 @@
     <tfoot>
     </tfoot>
     </table>
+  </div>
 
     <script src="../libs/jquery.js"></script>
     <script src="../libs/bootstrap/pooper.js"></script>
@@ -106,17 +104,21 @@
                       // Criar uma nova linha na tabela
                       var newRow = $('<tr>');
 
+                      if (item.level == "admin") {
+                        nivel = "Administrador";
+                      } else if(item.level == "manager"){
+                        nivel = "Gerente"
+                      } else {
+                        nivel = "Funcionário"
+                      }
+
                       // Preencher cada célula da linha com os dados do item
                       newRow.append('<td>' + item.id_user + '</td>');
                       newRow.append('<td>' + item.user + '</td>');
                       newRow.append('<td>' + formatarData(item.birthday) + '</td>');
                       newRow.append('<td>' + item.phone + '</td>');
                       newRow.append('<td>' + item.email + '</td>');
-                      newRow.append('<td>' + item.level + '</td>');
-                      newRow.append('<td>' + item.active + '</td>');
-                      newRow.append('<td>' + item.id_store + '</td>');
-                      newRow.append('<td>' + formatarData(item.updatedAt) + '</td>');
-                      newRow.append('<td>' + formatarData(item.createdAt) + '</td>');
+                      newRow.append('<td>' + nivel + '</td>');
                       // ... continuar para os outros campos
 
                       // Adicionar ações, se necessário
