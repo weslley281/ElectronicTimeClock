@@ -1,0 +1,2 @@
+cd ../ElectronicTimeClock/backend
+cd ../ElectronicTimeClock/frontend-desktop

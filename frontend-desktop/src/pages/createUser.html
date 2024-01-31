@@ -65,48 +65,53 @@
         <form>
             <div class="form-group">
                 <label for="user">Nome:</label>
-                <input type="text" class="form-control" id="user" placeholder="Nome Completo">
+                <input type="text" class="form-control" id="user" placeholder="Nome Completo" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Telefone:</label>
+              <input type="number" class="form-control" id="phone">
             </div>
 
             <div class="form-group">
-                <label for="birthday">Nome:</label>
-                <input type="date" class="form-control" id="birthday">
+                <label for="birthday">Data de Nascimento:</label>
+                <input type="date" class="form-control" id="birthday" required>
             </div>
 
             <div class="form-group">
               <label for="email">Melhor Endereço de email</label>
-              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Seu email">
+              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Seu email" required>
               <small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
             </div>
 
             <div class="form-group">
                 <label for="password">Senha</label>
-                <input type="password" class="form-control" id="password" placeholder="Senha">
+                <input type="password" class="form-control" id="password" placeholder="Senha" required>
             </div>
 
             <div class="form-group">
                 <label for="address_line1">Endereço Linha 1:</label>
-                <input type="text" class="form-control" id="address_line1">
+                <input type="text" class="form-control" id="address_line1" required>
             </div>
 
             <div class="form-group">
                 <label for="address_line1">Endereço Linha 2:</label>
-                <input type="text" class="form-control" id="address_line2">
+                <input type="text" class="form-control" id="address_line2" required>
             </div>
 
             <div class="form-group">
                 <label for="postalCode">Código Postal:</label>
-                <input type="text" class="form-control" id="postalCode">
+                <input type="text" class="form-control" id="postalCode" required>
             </div>
 
             <div class="form-group">
                 <label for="neighborhood">Bairro:</label>
-                <input type="text" class="form-control" id="neighborhood">
+                <input type="text" class="form-control" id="neighborhood" required>
             </div>
 
             <div class="form-group">
                 <label for="city">Cidade:</label>
-                <input type="text" class="form-control" id="city">
+                <input type="text" class="form-control" id="city" required>
             </div>
 
             <div class="form-group">
@@ -144,7 +149,7 @@
 
             <div class="form-group">
                 <label for="country">País:</label>
-                <input type="text" class="form-control" id="country" value="Brasil" readonly>
+                <input type="text" class="form-control" id="country" value="Brasil" readonly required>
             </div>
 
             <div class="form-group">
@@ -155,10 +160,17 @@
                 </select>
             </div>
 
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Clique em mim</label>
+            <div class="form-group">
+                <label for="id_store">Loja:</label>
+                <select id="id_store" class="form-control"></select>
             </div>
+
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+              <label class="form-check-label" for="exampleCheck1" >Eu aceito os Termos e Condições</label>
+            </div>
+
+            
 
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
@@ -166,6 +178,84 @@
     <script src="../libs/jquery.js"></script>
     <script src="../libs/bootstrap/pooper.js"></script>
     <script src="../libs/bootstrap/bootstrap.js"></script>
-    <script src="../libs/DataTables/datatables.js"></script>
+
+      <script>
+        $(document).ready(function () {
+          // Adicione um evento de clique ao botão de envio do formulário
+          $('form').submit(function (event) {
+            // Impedir o envio padrão do formulário
+            event.preventDefault();
+
+            // Obter os dados do formulário
+            var formData = {
+              user: $('#user').val(),
+              phone: $('#phone').val(),
+              password: $('#password').val(),
+              birthday: $('#birthday').val(),
+              email: $('#email').val(),
+              address_line1: $('#address_line1').val(),
+              address_line2: $('#address_line2').val(),
+              postalCode: $('#postalCode').val(),
+              neighborhood: $('#neighborhood').val(),
+              city: $('#city').val(),
+              state: $('#state').val(),
+              country: $('#country').val(),
+              level: "employee",
+              active: "active",
+              id_store: $('#id_store').val(),
+              // Adicione outros campos do formulário conforme necessário
+            };
+
+            // Fazer uma solicitação AJAX para o endpoint de criação de usuário
+            $.ajax({
+              url: 'http://localhost:5000/user/create',
+              method: 'POST',
+              contentType: 'application/json', // Definir o tipo de conteúdo para JSON
+              data: JSON.stringify(formData), // Converter os dados do formulário para JSON
+              success: function (response) {
+                console.log('Sucesso:', response);
+
+                alert('Usuário cadastrado com sucesso!');
+        
+                // Aguardar 3 segundos (3000 milissegundos) e redirecionar para uma nova página
+                setTimeout(function() {
+                  window.location.href = './user.html'; // Substitua pela URL desejada
+                }, 3000);
+              },
+              error: function (error) {
+                console.error('Erro na solicitação AJAX:', error);
+                alert('Erro ao cadastrar usuário!');
+              }
+            });
+          });
+        });
+      </script>
+
+      <script>
+        // Quando a página carregar
+        $(document).ready(function() {
+            // Fazer uma solicitação AJAX para obter os dados da API
+            $.ajax({
+                url: 'http://localhost:5000/store/all', // Substitua pelo URL real da sua API
+                method: 'GET',
+                success: function(data) {
+                    // Limpar o conteúdo atual da tabela
+                    $('#store').empty();
+
+                    // Iterar sobre os resultados e adicionar à tabela
+                    data.forEach(function(item) {
+                        // Criar uma nova linha na tabela
+                        var newRow = $(`<option value="${item.id_store}">${item.store}</option>`);
+                        // Adicionar a linha à tabela
+                        $('#id_store').append(newRow);
+                    });
+                },
+                error: function(error) {
+                    console.error('Erro na solicitação AJAX:', error);
+                }
+            });
+        });
+        </script>
+
     </body>
 </html>
