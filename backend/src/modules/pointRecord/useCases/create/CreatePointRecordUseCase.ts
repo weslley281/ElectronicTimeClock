@@ -6,7 +6,7 @@ import { hash } from 'bcrypt';
 
 interface IRequest {
   id_pointRecord?: string;
-  id_user: string;
+  id_user: string | undefined;
   checkIn: Date | string;
   checkInLunch?: Date | string | null;
   checkOutLunch?: Date | string | null;
@@ -28,12 +28,6 @@ class CreatePointRecordUseCase {
     updatedAt,
     createdAt,
   }: IRequest): Promise<PointRecord> {
-    const userAlreadyExists = await this.pointRecordRepository.findByEmail(
-      email
-    );
-
-    if (userAlreadyExists) throw new Error('User already exists');
-
     try {
       return this.pointRecordRepository.create({
         id_pointRecord,
