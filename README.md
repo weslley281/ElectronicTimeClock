@@ -5,7 +5,7 @@
 - [X] **RF01:** Cadastro de Usuários
   - O sistema deve permitir o cadastro de usuários com informações como nome, matrícula, e cargo.
   
-- [X] **RF01:** Cadastro de Lojas
+- [ ] **RF01:** Cadastro de Lojas
   - O sistema deve permitir o cadastro de lojas com informações como nome e endereço.
 
 - [ ] **RF02:** Registro de Ponto
