@@ -24,10 +24,10 @@ interface IPointRecordRepository {
   findById(id_pointRecord: string): Promise<PointRecord>;
   findByDate(
     id_user: string,
-    initialDate: string,
-    finalDate: string
+    initialDate: Date | string,
+    finalDate: Date | string
   ): Promise<PointRecord[]>;
-  findByToday(id_user: string, today: string): Promise<PointRecord[]>;
+  findByToday(id_user: string, today: Date | string): Promise<PointRecord[]>;
   deleteById(id_pointRecord: string): Promise<void>;
 }
 

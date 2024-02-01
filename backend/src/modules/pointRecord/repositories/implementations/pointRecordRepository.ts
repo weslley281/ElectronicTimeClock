@@ -85,8 +85,8 @@ class PointRecordRepository implements IPointRecordRepository {
 
   async findByDate(
     id_user: string,
-    initialDate: string,
-    finalDate: string
+    initialDate: Date | string,
+    finalDate: Date | string
   ): Promise<PointRecord[]> {
     const pointRecords: any = await pointRecordModel.findAll({
       where: {
