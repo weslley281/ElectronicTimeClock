@@ -60,7 +60,7 @@
         </div>
       </div>
     </nav>
-		<div id="conteudo"></div>
+    <div id="conteudo"></div>
     <script src="../libs/jquery.js"></script>
     <script src="../libs/bootstrap/pooper.js"></script>
     <script src="../libs/bootstrap/bootstrap.js"></script>
@@ -68,49 +68,51 @@
 
     <script>
       // Quando a página carregar
-      $(document).ready(function() {
-          // Fazer uma solicitação AJAX para obter os dados da API
-          $.ajax({
-              url: 'http://localhost:5000/user/all/f3950d1c-cc17-44d7-aedb-f12479ab77b3', // Substitua pelo URL real da sua API
-              method: 'GET',
-              success: function(data) {
-                  // Limpar o conteúdo atual da tabela
-                  $('#conteudo').empty();
+      $(document).ready(function () {
+        // Fazer uma solicitação AJAX para obter os dados da API
+        $.ajax({
+          url: 'http://localhost:5000/user/all/f3950d1c-cc17-44d7-aedb-f12479ab77b3', // Substitua pelo URL real da sua API
+          method: 'GET',
+          success: function (data) {
+            // Limpar o conteúdo atual da tabela
+            $('#conteudo').empty();
 
-                  // Iterar sobre os resultados e adicionar à tabela
-                  data.forEach(function(item) {
-                      // Criar uma nova linha na tabela
-                      var newRow = $('<ul>');
-                      var nivel = "";
-                      var ativo = item.active == "active" ? "Ativo" : "Inativo";
+            // Iterar sobre os resultados e adicionar à tabela
+            data.forEach(function (item) {
+              // Criar uma nova linha na tabela
+              var newRow = $('<ul>');
+              var nivel = '';
+              var ativo = item.active == 'active' ? 'Ativo' : 'Inativo';
 
-                      if (item.level == admin) {
-                        nivel = "Administrador";
-                      } else if(item.level == "manager"){
-                        nivel = "Gerente"
-                      } else {
-                        nivel = "Funcionário"
-                      }
-
-                      // Preencher cada célula da linha com os dados do item
-
-                      // ... continuar para os outros campos
-
-                      // Adicionar a linha à tabela
-                      $('#conteudo').append(newRow);
-                  });
-              },
-              error: function(error) {
-                  console.error('Erro na solicitação AJAX:', error);
+              if (item.level == admin) {
+                nivel = 'Administrador';
+              } else if (item.level == 'manager') {
+                nivel = 'Gerente';
+              } else {
+                nivel = 'Funcionário';
               }
-          });
+
+              // Preencher cada célula da linha com os dados do item
+
+              // ... continuar para os outros campos
+
+              // Adicionar a linha à tabela
+              $('#conteudo').append(newRow);
+            });
+          },
+          error: function (error) {
+            console.error('Erro na solicitação AJAX:', error);
+          },
+        });
       });
 
       function formatarData(data) {
-          const dataFormatada = new Date(data);
-          return dataFormatada.toLocaleString(); // Ajuste conforme necessário
+        const dataFormatada = new Date(data);
+        return dataFormatada.toLocaleString(); // Ajuste conforme necessário
       }
-        </script>
-  <script>$('#minhaTabela').DataTable();</script>
+    </script>
+    <script>
+      $('#minhaTabela').DataTable();
+    </script>
   </body>
 </html>
