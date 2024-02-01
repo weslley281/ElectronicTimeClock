@@ -67,24 +67,26 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-body">
-              <h2 class="card-title text-center">Faça o Login</h2>
+              <h2 class="card-title text-center">Bater Ponto</h2>
               <form>
                 <div class="mb-3">
-                  <label for="inputEmail" class="form-label">Email</label>
+                  <label for="email" class="form-label">Email</label>
                   <input
                     type="email"
                     class="form-control"
-                    id="inputEmail"
+                    id="email"
                     placeholder="Digite seu email"
+                    required
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="inputPassword" class="form-label">Senha</label>
+                  <label for="password" class="form-label">Senha</label>
                   <input
                     type="password"
                     class="form-control"
-                    id="inputPassword"
+                    id="password"
                     placeholder="Digite sua senha"
+                    required
                   />
                 </div>
                 <button type="submit" class="btn btn-primary">
@@ -101,5 +103,46 @@
     <script src="./libs/bootstrap/pooper.js"></script>
     <script src="./libs/bootstrap/bootstrap.js"></script>
     <script src="./libs/DataTables/datatables.js"></script>
+
+    <script>
+      const hoje = new Date();
+
+      $(document).ready(function () {
+        // Adicione um evento de clique ao botão de envio do formulário
+        $('form').submit(function (event) {
+          // Impedir o envio padrão do formulário
+          event.preventDefault();
+
+          // Obter os dados do formulário
+          var formData = {
+            password: $('#password').val(),
+            email: $('#email').val(),
+            // Adicione outros campos do formulário conforme necessário
+          };
+
+          // Fazer uma solicitação AJAX para o endpoint de criação de usuário
+          $.ajax({
+            url: 'http://localhost:5000/pointRecord/create',
+            method: 'POST',
+            contentType: 'application/json', // Definir o tipo de conteúdo para JSON
+            data: JSON.stringify(formData), // Converter os dados do formulário para JSON
+            success: function (response) {
+              console.log('Sucesso:', response);
+
+              alert(`Ponto registrado com sucesso em ${hoje}`);
+
+              // Aguardar 3 segundos (3000 milissegundos) e redirecionar para uma nova página
+              setTimeout(function () {
+                window.location.href = './user.html'; // Substitua pela URL desejada
+              }, 3000);
+            },
+            error: function (error) {
+              console.error('Erro na solicitação AJAX:', error);
+              alert(`Erro senha ou email inválidos!: ${error}`);
+            },
+          });
+        });
+      });
+    </script>
   </body>
 </html>

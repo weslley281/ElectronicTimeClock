@@ -63,28 +63,35 @@
 
     <div class="container-fluid">
       <div class="row my-2">
-        <div class="col"><a class="btn btn-success" href="./createUser.html">Criar Um Usuário</a></div>
+        <div class="col">
+          <a class="btn btn-success" href="./createUser.html"
+            >Criar Um Usuário</a
+          >
+        </div>
       </div>
-    <table id="minhaTabela" class="table table-bordered" width="100%" cellspacing="0">
-		<thead>
-			<tr>
-        <th scope="col">ID</th>
-        <th scope="col">Usuário</th>
-        <th scope="col">Data de Nascimento</th>
-        <th scope="col">Telefone</th>
-        <th scope="col">Email</th>
-        <th scope="col">Nível</th>
-				<th scope="col"></th>
-				<th scope="col"></th>
-				<th scope="col"></th>
-			</tr>
-		</thead>
-		<tbody>
-    </tbody>
-    <tfoot>
-    </tfoot>
-    </table>
-  </div>
+      <table
+        id="minhaTabela"
+        class="table table-bordered"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Usuário</th>
+            <th scope="col">Data de Nascimento</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Nível</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot></tfoot>
+      </table>
+    </div>
 
     <script src="../libs/jquery.js"></script>
     <script src="../libs/bootstrap/pooper.js"></script>
@@ -93,64 +100,76 @@
 
     <script>
       // Quando a página carregar
-      $(document).ready(function() {
-          // Fazer uma solicitação AJAX para obter os dados da API
-          $.ajax({
-              url: 'http://localhost:5000/user/all/f3950d1c-cc17-44d7-aedb-f12479ab77b3', // Substitua pelo URL real da sua API
-              method: 'GET',
-              success: function(data) {
-                  // Limpar o conteúdo atual da tabela
-                  $('#minhaTabela tbody').empty();
+      $(document).ready(function () {
+        // Fazer uma solicitação AJAX para obter os dados da API
+        $.ajax({
+          url: 'http://localhost:5000/user/all/f3950d1c-cc17-44d7-aedb-f12479ab77b3', // Substitua pelo URL real da sua API
+          method: 'GET',
+          success: function (data) {
+            // Limpar o conteúdo atual da tabela
+            $('#minhaTabela tbody').empty();
 
-                  // Iterar sobre os resultados e adicionar à tabela
-                  data.forEach(function(item) {
-                      // Criar uma nova linha na tabela
-                      var newRow = $('<tr>');
+            // Iterar sobre os resultados e adicionar à tabela
+            data.forEach(function (item) {
+              // Criar uma nova linha na tabela
+              var newRow = $('<tr>');
 
-                      if (item.level == "admin") {
-                        nivel = "Administrador";
-                      } else if(item.level == "manager"){
-                        nivel = "Gerente"
-                      } else {
-                        nivel = "Funcionário"
-                      }
-
-                      // Preencher cada célula da linha com os dados do item
-                      newRow.append('<td>' + item.id_user + '</td>');
-                      newRow.append('<td>' + item.user + '</td>');
-                      newRow.append('<td>' + formatarData(item.birthday) + '</td>');
-                      newRow.append('<td>' + item.phone + '</td>');
-                      newRow.append('<td>' + item.email + '</td>');
-                      newRow.append('<td>' + nivel + '</td>');
-                      // ... continuar para os outros campos
-
-                      // Adicionar ações, se necessário
-
-                      newRow.append(`<td><a class="btn btn-info" href="./userDetail.html?id=${item.id_user}">Detalhes</a></td>`);
-                      newRow.append('<td><button class="btn btn-primary" onclick="editar(' + item.id_user + ')">Editar</button></td>');
-                      newRow.append('<td><button class="btn btn-danger" onclick="deletar(' + item.id_user + ')">Deletar</button></td>');
-
-                      // Adicionar a linha à tabela
-                      $('#minhaTabela tbody').append(newRow);
-                  });
-              },
-              error: function(error) {
-                  console.error('Erro na solicitação AJAX:', error);
+              if (item.level == 'admin') {
+                nivel = 'Administrador';
+              } else if (item.level == 'manager') {
+                nivel = 'Gerente';
+              } else {
+                nivel = 'Funcionário';
               }
-          });
+
+              // Preencher cada célula da linha com os dados do item
+              newRow.append('<td>' + item.id_user + '</td>');
+              newRow.append('<td>' + item.user + '</td>');
+              newRow.append('<td>' + formatarData(item.birthday) + '</td>');
+              newRow.append('<td>' + item.phone + '</td>');
+              newRow.append('<td>' + item.email + '</td>');
+              newRow.append('<td>' + nivel + '</td>');
+              // ... continuar para os outros campos
+
+              // Adicionar ações, se necessário
+
+              newRow.append(
+                `<td><a class="btn btn-info" href="./userDetail.html?id=${item.id_user}">Detalhes</a></td>`
+              );
+              newRow.append(
+                '<td><button class="btn btn-primary" onclick="editar(' +
+                  item.id_user +
+                  ')">Editar</button></td>'
+              );
+              newRow.append(
+                '<td><button class="btn btn-danger" onclick="deletar(' +
+                  item.id_user +
+                  ')">Deletar</button></td>'
+              );
+
+              // Adicionar a linha à tabela
+              $('#minhaTabela tbody').append(newRow);
+            });
+          },
+          error: function (error) {
+            console.error('Erro na solicitação AJAX:', error);
+          },
+        });
       });
 
       // Função para editar um usuário
       function editar(id_user) {
-          // Implemente a lógica para editar um usuário aqui
-          console.log('Editar usuário com ID:', id_user);
+        // Implemente a lógica para editar um usuário aqui
+        console.log('Editar usuário com ID:', id_user);
       }
 
       function formatarData(data) {
-          const dataFormatada = new Date(data);
-          return dataFormatada.toLocaleString(); // Ajuste conforme necessário
+        const dataFormatada = new Date(data);
+        return dataFormatada.toLocaleString(); // Ajuste conforme necessário
       }
-        </script>
-  <script>$('#minhaTabela').DataTable();</script>
+    </script>
+    <script>
+      $('#minhaTabela').DataTable();
+    </script>
   </body>
 </html>

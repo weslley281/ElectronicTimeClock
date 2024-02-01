@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "electron-reload src/main.js && electron src/main.js",
-    "dev": "set NODE_ENV=development && electron src/main.js"
+    "dev": "set NODE_ENV=development && electron src/main.js",
+    "build": "electron-builder"
   },
   "keywords": [
     "ponto",
@@ -21,6 +22,27 @@
     "popper.js": "^1.16.1"
   },
   "devDependencies": {
-    "electron-reload": "^2.0.0-alpha.1"
+    "electron-reload": "^2.0.0-alpha.1",
+    "electron-builder": "^22.13.1"
+  },
+  "build": {
+    "appId": "com.example.electronictimeclock",
+    "productName": "ElectronicTimeClock",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   }
 }
