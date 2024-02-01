@@ -2,6 +2,7 @@
 import { createConnectionDataBase } from '@database/db';
 import { createTableStore } from '@database/models/storesModel';
 import { createTableUser } from '@database/models/usersModel';
+import { createTablePointRecord } from '@database/models/pointRecordModel';
 
 //express
 import express, { NextFunction, Request, Response } from 'express';
@@ -16,10 +17,12 @@ import { AppError } from './middlewares/Erros';
 //Routes
 import { storesRoutes } from './routes/store.routes';
 import { usersRoutes } from 'routes/user.routes';
+import { pointrecordsRoutes } from 'routes/pointRecord.routes';
 
 createConnectionDataBase();
 createTableStore();
 createTableUser();
+createTablePointRecord();
 
 const app = express();
 
@@ -27,6 +30,7 @@ app.use(express.json());
 
 app.use('/store', storesRoutes);
 app.use('/user', usersRoutes);
+app.use('/pointRecord', pointrecordsRoutes);
 
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
