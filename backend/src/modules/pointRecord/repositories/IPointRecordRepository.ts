@@ -27,7 +27,7 @@ interface IPointRecordRepository {
     initialDate: Date | string,
     finalDate: Date | string
   ): Promise<PointRecord[]>;
-  findByToday(id_user: string, today: Date | string): Promise<PointRecord[]>;
+  findByToday(id_user: string, today: Date | string): Promise<PointRecord>;
   deleteById(id_pointRecord: string): Promise<void>;
 }
 

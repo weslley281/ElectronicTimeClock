@@ -120,6 +120,13 @@
             // Adicione outros campos do formulário conforme necessário
           };
 
+          $.ajax({
+            url: `http://localhost:5000/pointRecord/id/${id_user}`, // Substitua pelo URL real da sua API
+            method: 'GET',
+            success: function (data) {
+            }
+          })
+
           // Fazer uma solicitação AJAX para o endpoint de criação de usuário
           $.ajax({
             url: 'http://localhost:5000/pointRecord/create',

@@ -100,13 +100,25 @@ class PointRecordRepository implements IPointRecordRepository {
     return pointRecords;
   }
 
-  async findByToday(id_user: string, today: string): Promise<PointRecord[]> {
-    const obj: any = await pointRecordModel.findOne({
-      where: { id_user, checkIn: today },
+  async findByToday(id_user: string, today: Date): Promise<PointRecord> {
+    const startDate = new Date(today);
+    startDate.setHours(0, 0, 0, 0); // Define a hora inicial como 00:00:00
+  
+    const endDate = new Date(today);
+    endDate.setHours(23, 59, 59, 999); // Define a hora final como 23:59:59.999
+  
+    const pointRecords: any = await pointRecordModel.findOne({
+      where: {
+        id_user,
+        checkIn: {
+          [Op.between]: [startDate, endDate],
+        },
+      },
     });
-
-    return obj;
+  
+    return pointRecords;
   }
+  
 
   async findByTodayLunch(id_user: string, today: string): Promise<Boolean> {
     const pointRecord: any = await pointRecordModel.findOne({
