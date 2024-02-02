@@ -1,9 +1,9 @@
 import { AppError } from '../../../../middlewares/Erros';
 import { Request, Response } from 'express';
 import { z } from 'zod';
-import { FindPointRecordByTodayUseCase } from './GetUserByIdUseCase';
+import { FindPointRecordByTodayUseCase } from './FindPointRecordByTodayUseCase';
 
-class GetPointRecordByIdController {
+class FindPointRecordByTodayController {
   constructor(private findPointRecordByTodayUseCase: FindPointRecordByTodayUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
@@ -28,4 +28,4 @@ class GetPointRecordByIdController {
   }
 }
 
-export { GetPointRecordByIdController };
+export { FindPointRecordByTodayController };

@@ -1,9 +1,9 @@
-import { UserRepository } from '../../repositories/implementations/userRepository';
-import { GetUserByIdController } from './GetUserByIdController';
-import { GetUserByIdUseCase } from './GetUserByIdUseCase';
+import { PointRecordRepository } from '@modules/pointRecord/repositories/implementations/pointRecordRepository';
+import { FindPointRecordByTodayController } from './FindPointRecordByTodayController';
+import { FindPointRecordByTodayUseCase } from './FindPointRecordByTodayUseCase';
 
-const userRepository = UserRepository.getInstance();
-const getUserByIdUseCase = new GetUserByIdUseCase(userRepository);
-const getUserByIdController = new GetUserByIdController(getUserByIdUseCase);
+const pointRecordRepository = PointRecordRepository.getInstance();
+const findPointRecordByTodayUseCase = new FindPointRecordByTodayUseCase(pointRecordRepository);
+const findPointRecordByTodayController = new FindPointRecordByTodayController(findPointRecordByTodayUseCase);
 
-export { getUserByIdController };
+export { findPointRecordByTodayController };
