@@ -5,12 +5,14 @@ import { z } from 'zod';
 import { randomUUID } from 'node:crypto';
 import { MatchPasswordPointRecord } from 'middlewares/matchPasswordPointRecord';
 import { GetUserByEmailUseCase } from '@modules/users/useCases/findByEmail/GetUserByEmailUseCase';
+import { FindPointRecordByTodayUseCase } from '../findByToday/FindPointRecordByTodayUseCase';
 
 class CreatePointRecordController {
   constructor(
     private createPointRecordUseCase: CreatePointRecordUseCase,
     private matchPasswordPointRecord: MatchPasswordPointRecord,
-    private getUserByEmailUseCase: GetUserByEmailUseCase
+    private getUserByEmailUseCase: GetUserByEmailUseCase,
+    private findPointRecordByTodayUseCase: FindPointRecordByTodayUseCase
   ) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
